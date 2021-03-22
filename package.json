@@ -1,7 +1,7 @@
 {
-	"name": "fcc-api-projects-boilerplate",
+	"name": "naresh-poonia-fcc-full-stack-app-challenge",
 	"version": "0.0.1",
-	"description": "An FCC Backend Challenge",
+	"description": "Naresh Poonia FCC Backend Challenge",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js"
