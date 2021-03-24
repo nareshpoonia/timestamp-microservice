@@ -25,6 +25,10 @@ app.get("/api/hello", function (req, res) {
 });
 
 
+app.get("/api/timestamp/:date_string", function (req, res) {
+  res.json({ error : "Invalid Date" });
+});
+
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT, function () {
