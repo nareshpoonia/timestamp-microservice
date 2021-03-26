@@ -24,7 +24,12 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
-
+app.get("/api/timestamp/:date_string", function (req, res) {
+  var todaysDate = new Date()
+  res.json({ "unix" : todaysDate.getTime(),
+  "utc": todaysDate.toUTCString()  
+  });
+});
 app.get("/api/timestamp/:date_string", function (req, res) {
   res.json({ error : "Invalid Date" });
 });
