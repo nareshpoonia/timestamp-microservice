@@ -18,6 +18,9 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get("/requestHeaderParser", function (req, res) {
+  res.sendFile(__dirname + '/views/requestHeaderParser.html');
+});
 
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
@@ -50,6 +53,10 @@ app.get("/api/timestamp/:date_string", function (req, res) {
        "utc" : datePassed.toUTCString() 
      })}
      ;
+});
+app.get("/api/whoami", function (req, res) {
+  res.json({"language" : req.headers["accept-language"]});
+  
 });
 
 
