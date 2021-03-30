@@ -55,7 +55,8 @@ app.get("/api/timestamp/:date_string", function (req, res) {
      ;
 });
 app.get("/api/whoami", function (req, res) {
-  res.json({"language" : req.headers["accept-language"]});
+  res.json({"language" : req.headers["accept-language"],
+"software":req.headers["user-agent"] });
   
 });
 
