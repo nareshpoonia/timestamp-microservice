@@ -1,4 +1,3 @@
-var database_uri ='mongodb+srv://naresh-poonia-fcc-coding-challenges:break4200@naresh-poonia-fcc-codin.miflq.mongodb.net/naresh-poonia-fcc-coding-challenges?retryWrites=true&w=majority'
 // server.js
 // where your node app starts
 
@@ -9,12 +8,7 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var shortid = require('shortid');
 
-//mongoose.connect(process.env.DB_URI);
-mongoose.connect(
-database_uri, {
-  useNewUrlParser: true, 
-  useUnifiedTopology:true 
-});
+mongoose.connect(process.env.DB_URI);
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
