@@ -8,7 +8,10 @@ var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var shortid = require('shortid');
 
-mongoose.connect(process.env.DB_URI);
+mongoose.connect(process.env.DB_URI,{
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+});
 //mongoose.connect(
 //database_uri, {
   //useNewUrlParser: true, 
