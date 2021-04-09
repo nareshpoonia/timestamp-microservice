@@ -127,24 +127,12 @@ app.post("/api/shorturl/new", function (req, res) {
 
 
 });
-app.get("/api/shorturl/:suffix", (req, res, next) => {
+app.get("/api/shorturl/:suffix", (req, res) => {
   let userGeneratedSuffix = req.params.suffix;
   ShortURL.find({suffix: userGeneratedSuffix}).then(foundUrls => {
     let urlForRedirect = foundUrls[0];
-    console.log(urlForRedirect,"uslForRedirect")
-    console.log(foundUrls, "this is foundurl")
-    console.log(typeof(foundUrls), "this is our type of foundurl")
-    console.log(typeof(foundUrls[0]),"this is our type of foundurl[0]")
-    console.log(foundUrls[0],"this is foundURL[0]")
-    console.log(urlForRedirect.original_url)
-    if(urlForRedirect.original_url)
-      res.status(200).send('<script>window.location.href="http://'+urlForRedirect.original_url+'"</script>');
-
-    //res.status(200).send('<script>window.location.href="https://google.com"</script>');
-    //res.redirect(urlForRedirect.original_url)
-    next();
+    res.redirect(urlForRedirect.original_url);
   });
-  
 });
 // listen for requests :)
 var listener = app.listen(port, function () {
