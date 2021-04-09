@@ -9,6 +9,11 @@ var mongoose = require('mongoose');
 var shortid = require('shortid');
 
 mongoose.connect(process.env.DB_URI);
+//mongoose.connect(
+//database_uri, {
+  //useNewUrlParser: true, 
+  //useUnifiedTopology:true 
+//});
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -73,7 +78,8 @@ app.get("/api/timestamp/:date_string", function (req, res) {
 
 //request header parser
 app.get("/api/whoami", function (req, res) {
-  res.json({"language" : req.headers["accept-language"],
+  res.json({"ipaddress" : req.connection.remoteAddress,
+    "language" : req.headers["accept-language"],
 "software":req.headers["user-agent"] });
   
 });
