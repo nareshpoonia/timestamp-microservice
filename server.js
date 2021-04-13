@@ -106,7 +106,7 @@ app.use(bodyParser.json())
 app.post("/api/shorturl/new", function (req, res) {
   let client_requested_url =req.body.url
 
-  //let urlRegex = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)
+  let urlRegex = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)
   
   //if(!client_requested_url.match(urlRegex)){
     //response.json({error: 'invalid url'})
@@ -133,8 +133,8 @@ app.post("/api/shorturl/new", function (req, res) {
   newURL.save(function(err,doc){
     if(err) return console.error(err);
     //console.log({suffix}, "Suffix @ save")
-    let urlRegex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-  
+    
+
     res.json({
       
       //"saved": true,
@@ -149,18 +149,12 @@ app.post("/api/shorturl/new", function (req, res) {
 });
 app.get("/api/shorturl/:suffix", (req, res) => {
   let userGeneratedSuffix = req.params.suffix;
-  //let urlRegex = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)
-  let urlRegex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-  //if(!client_requested_url.match(urlRegex)){
-    //response.json({error: 'invalid url'})
-    //return
-  //}
   //console.log({req})
   ShortURL.find({suffix: userGeneratedSuffix}).then(foundUrls => {
     let urlForRedirect = foundUrls[0];
     console.log(foundUrls[0],"This is final foundUrls")
     console.log({urlForRedirect, foundUrls})
-    if(client_requested_url.match(urlRegex) &&urlForRedirect && urlForRedirect.original_url) {
+    if(urlForRedirect && urlForRedirect.original_url) {
       res.redirect(`${urlForRedirect.original_url}`);
       //Url.findOne({suffix: suffix}, (error, result) => {
     //if(!error && result != undefined){
@@ -169,9 +163,6 @@ app.get("/api/shorturl/:suffix", (req, res) => {
       //response.json('URL not Found')
     //}
       
-    }
-    else {
-      response.json({error: 'invalid url'})
     }
   });
 });
